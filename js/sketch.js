@@ -5,6 +5,7 @@ let vx1, vx2, vy1, vy2, d = 5;
 function setup() {
     var canvas = createCanvas(window.innerWidth, window.innerHeight);
     canvas.parent("p5container");
+    noCursor()
 }
 
 function draw() {
@@ -20,10 +21,6 @@ function draw() {
             particles[i].update();
             particles[i].show();
         }
-        
-        //locates cursor for particles origin
-        p.x = mouseX
-        p.y = mouseY      
     }
 
     //shows planets
@@ -47,9 +44,9 @@ function draw() {
         
         for(let l = 0; l < planets.length; l++){
             try {
-                console.log(((particles[p].x - planets[l].x)**2 + (particles[p].y - planets[l].y)**2)**0.5)
                 if(((particles[p].x - planets[l].x)**2 + (particles[p].y - planets[l].y)**2) <= planets[l].radius**2){
                     particles.splice(p,1)
+                    break
                  }
             } catch (error) {
                 continue
@@ -97,7 +94,7 @@ class Particle{
     }
 
     update(){
-        this.time += 0.01
+        this.time += 0.0065
         this.x += this.time * this.vx
         this.y += this.time * this.vy
         this.d += 0.01
